@@ -60,14 +60,6 @@ class Automator_Sejoli_Update_Order_Status_Trigger {
 		    endif;
 		}
 
-		if(false !== $respond['valid'] && isset($respond['orders']) && isset($respond['orders']['ID'])) :
-
-			$order       = $respond['orders'];
-			$prev_status = $order['status'];
-			$new_status  = $args[0]['status'];
-
-		endif;
-
 	}
 
 	/**
