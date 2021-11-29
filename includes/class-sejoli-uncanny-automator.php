@@ -166,7 +166,6 @@ class Sejoli_Uncanny_Automator {
 
 		$sejoli_automator = new Sejoli_Uncanny_Automator\Admin\Uncanny_Sejoli_Automator();
 
-		// $this->loader->add_action( 'plugins_loaded', $sejoli_automator, 'setup_integration' );
 		$this->loader->add_action( 'automator_configuration_complete', $sejoli_automator, 'add_this_integration' );
 
 	}
