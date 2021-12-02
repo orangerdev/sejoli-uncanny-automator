@@ -41,7 +41,7 @@ class Add_Sejoli_Automator_Integration {
 	protected function setup() {
 
 		$this->set_integration( 'SEJOLI' );
-		$this->set_name( 'Sejoli' );
+		$this->set_name( 'Sejoli Standalone' );
 		$this->set_icon( 'default-logo.png' );
 		$this->set_icon_path( '../sejoli-automator/img/' );
 		$this->set_plugin_file_path( dirname( __DIR__ ) . DIRECTORY_SEPARATOR . 'admin/uncanny-sejoli-automator.php' );
