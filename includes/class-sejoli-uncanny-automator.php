@@ -117,6 +117,7 @@ class Sejoli_Uncanny_Automator {
 		 */
 		require_once SEJOLI_UNCANNY_AUTOMATOR_DIR . 'admin/class-sejoli-uncanny-automator-admin.php';
 		require_once SEJOLI_UNCANNY_AUTOMATOR_DIR . 'admin/uncanny-sejoli-automator.php';
+		require_once SEJOLI_UNCANNY_AUTOMATOR_DIR . 'admin/uncanny-sejoli-zoom-automator.php';
 		require_once SEJOLI_UNCANNY_AUTOMATOR_DIR . 'admin/uncanny-sejowoo-automator.php';
 
 		/**
@@ -168,6 +169,10 @@ class Sejoli_Uncanny_Automator {
 		$sejoli_automator = new Sejoli_Uncanny_Automator\Admin\Uncanny_Sejoli_Automator();
 
 		$this->loader->add_action( 'automator_configuration_complete', $sejoli_automator, 'add_this_integration' );
+
+		$sejoli_zoom_automator = new Sejoli_Uncanny_Automator\Admin\Uncanny_Sejoli_Zoom_Automator();
+
+		$this->loader->add_action( 'automator_configuration_complete', $sejoli_zoom_automator, 'add_this_integration' );
 
 		$sejowoo_automator = new Sejoli_Uncanny_Automator\Admin\Uncanny_Sejowoo_Automator();
 
