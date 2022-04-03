@@ -32,7 +32,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '447da1aa8da733de48749e2df83a2bcdc53f997b',
+    'reference' => 'd6108488f8f1e973c3bda0e870f0c4c881f116de',
     'name' => '__root__',
   ),
   'versions' => 
@@ -44,7 +44,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '447da1aa8da733de48749e2df83a2bcdc53f997b',
+      'reference' => 'd6108488f8f1e973c3bda0e870f0c4c881f116de',
     ),
     'doctrine/inflector' => 
     array (
@@ -188,6 +188,15 @@ private static $installed = array (
         0 => '9999999-dev',
       ),
       'reference' => 'd34de7583161bccbf867c4713effe3325ae7fad9',
+    ),
+    'yahnis-elsts/plugin-update-checker' => 
+    array (
+      'pretty_version' => 'v4.11',
+      'version' => '4.11.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '3155f2d3f1ca5e7ed3f25b256f020e370515af43',
     ),
   ),
 );
