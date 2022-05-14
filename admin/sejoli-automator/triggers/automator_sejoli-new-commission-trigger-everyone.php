@@ -3,11 +3,11 @@
 namespace Uncanny_Automator;
 
 /**
- * Class Automator_Sejoli_New_Commission_Trigger
+ * Class Automator_Sejoli_New_Commission_Trigger_Everyone
  *
  * @package Uncanny_Automator
  */
-class Automator_Sejoli_New_Commission_Trigger {
+class Automator_Sejoli_New_Commission_Trigger_Everyone {
 
 	/**
 	 * Integration code
@@ -24,8 +24,8 @@ class Automator_Sejoli_New_Commission_Trigger {
 	 */
 	public function __construct() {
 
-		$this->trigger_code = 'SEJOLI_NEW_COMMISSION';
-		$this->trigger_meta = 'SEJOLI_CREATE_COMMISSION';
+		$this->trigger_code = 'SEJOLI_NEW_COMMISSION_EVERYONE';
+		$this->trigger_meta = 'SEJOLI_CREATE_COMMISSION_EVERYONE';
 
 		$this->define_trigger();
 
@@ -45,6 +45,7 @@ class Automator_Sejoli_New_Commission_Trigger {
 			'action'              => 'sejoli/order/new',
 			'priority'            => 999,
 			'accepted_args'       => 2,
+			'type'                => 'anonymous',
 			'validation_function' => array( $this, 'validate_trigger' ),
 			'options_callback'    => '',
 		);

@@ -2,14 +2,14 @@
 // use Uncanny_Automator\Recipe;
 
 // /**
-//  * Class Automator_Sejowoo_New_Commission_Trigger
+//  * Class Automator_Sejowoo_New_Commission_Trigger_Everyone
 //  */
-// class Automator_Sejowoo_New_Commission_Trigger {
+// class Automator_Sejowoo_New_Commission_Trigger_Everyone {
 	
 // 	use Recipe\Triggers;
 
 // 	/**
-// 	 * Automator_Sejowoo_New_Commission_Trigger constructor.
+// 	 * Automator_Sejowoo_New_Commission_Trigger_Everyone constructor.
 // 	 */
 // 	public function __construct() {
 	
@@ -44,11 +44,11 @@
 namespace Uncanny_Automator;
 
 /**
- * Class Automator_Sejowoo_New_Commission_Trigger
+ * Class Automator_Sejowoo_New_Commission_Trigger_Everyone
  *
  * @package Uncanny_Automator
  */
-class Automator_Sejowoo_New_Commission_Trigger {
+class Automator_Sejowoo_New_Commission_Trigger_Everyone {
 
 	/**
 	 * Integration code
@@ -65,8 +65,8 @@ class Automator_Sejowoo_New_Commission_Trigger {
 	 */
 	public function __construct() {
 
-		$this->trigger_code = 'SEJOWOO_NEW_COMMISSION';
-		$this->trigger_meta = 'SEJOWOO_CREATE_COMMISSION';
+		$this->trigger_code = 'SEJOWOO_NEW_COMMISSION_EVERYONE';
+		$this->trigger_meta = 'SEJOWOO_CREATE_COMMISSION_EVERYONE';
 
 		$this->define_trigger();
 
@@ -86,7 +86,7 @@ class Automator_Sejowoo_New_Commission_Trigger {
 			'action'              => 'sejowoo/commission/add',
 			'priority'            => 999,
 			'accepted_args'       => 2,
-			// 'type'                => 'anonymous',
+			'type'                => 'anonymous',
 			'validation_function' => array( $this, 'validate_trigger' ),
 			'options_callback'    => '',
 		);
