@@ -220,7 +220,7 @@ class Automator_Sejoli_New_Commission_Trigger_Everyone {
 							Automator()->insert_trigger_meta( $trigger_meta );
 
 							$trigger_meta['meta_key']   = 'SEJOLITOKEN_ORDERGRANDTOTAL';
-							$trigger_meta['meta_value'] = $order_data[0]['grand_total'];
+							$trigger_meta['meta_value'] = sejolisa_price_format($order_data[0]['grand_total']);
 							Automator()->insert_trigger_meta( $trigger_meta );
 
 							global $wpdb;

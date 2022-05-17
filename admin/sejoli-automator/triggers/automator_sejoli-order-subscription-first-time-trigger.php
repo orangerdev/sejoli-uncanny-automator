@@ -216,7 +216,7 @@ class Automator_Sejoli_Order_Subscription_First_Time_Trigger {
 							Automator()->insert_trigger_meta( $trigger_meta );
 
 							$trigger_meta['meta_key']   = 'SEJOLITOKEN_ORDERGRANDTOTAL';
-							$trigger_meta['meta_value'] = $order[0]['grand_total'];
+							$trigger_meta['meta_value'] = sejolisa_price_format($order[0]['grand_total']);
 							Automator()->insert_trigger_meta( $trigger_meta );
 
 							global $wpdb;

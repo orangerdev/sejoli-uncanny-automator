@@ -11,35 +11,7 @@
 // 	/**
 // 	 * Automator_Sejoli_Order_Subscription_Regular_Trigger_Everyone constructor.
 // 	 */
-// 	public function __construct() {
-	
-// 		$this->setup_trigger();
-	
-// 	}
-
-// 	/**
-// 	 * Setup Trigger
-// 	 */
-// 	protected function setup_trigger() {
-
-// 		$this->set_integration( 'SEJOLI' );
-
-// 		$this->set_trigger_code( 'SEJOLI_ORDER_SUBSCRIPTION_REGULAR' ); // Unique Trigger code
-
-// 		$this->set_trigger_meta( 'SEJOLI_CREATE_ORDER_SUBSCRIPTION_REGULAR' ); // Re-useable meta, selectable value in blue boxes
-
-// 		/* Translators: Some information for translators */
-// 		$this->set_sentence( sprintf( 'If there is a "regular" subscription order type' ) ); // Sentence to appear when trigger is added. {{a page:%1$s}} will be presented in blue box as selectable value
-
-// 		/* Translators: Some information for translators */
-// 		$this->set_readable_sentence( 'If there is a "regular" subscription order type' ); // Non-active state sentence to show
-
-// 		$this->add_action( 'sejoli/thank-you/render', 999, 2 ); // which do_action() fires this trigger
-
-// 		$this->register_trigger(); // Registering this trigger
-
-// 	}
-
+// 	publ
 
 namespace Uncanny_Automator;
 
@@ -258,7 +230,7 @@ class Automator_Sejoli_Order_Subscription_Regular_Trigger_Everyone {
 							Automator()->insert_trigger_meta( $trigger_meta );
 
 							$trigger_meta['meta_key']   = 'SEJOLITOKEN_ORDERGRANDTOTAL';
-							$trigger_meta['meta_value'] = $order[0]['grand_total'];
+							$trigger_meta['meta_value'] = sejolisa_price_format($order[0]['grand_total']);
 							Automator()->insert_trigger_meta( $trigger_meta );
 
 							global $wpdb;
