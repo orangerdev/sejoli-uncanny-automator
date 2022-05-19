@@ -3,11 +3,11 @@
 namespace Uncanny_Automator;
 
 /**
- * Class Automator_Sejoli_Order_Subscription_First_Time_Trigger
+ * Class Automator_Sejoli_Order_Subscription_Tryout_Trigger_Everyone
  *
  * @package Uncanny_Automator
  */
-class Automator_Sejoli_Order_Subscription_First_Time_Trigger {
+class Automator_Sejoli_Order_Subscription_Tryout_Trigger_Everyone {
 
 	/**
 	 * Integration code
@@ -24,8 +24,8 @@ class Automator_Sejoli_Order_Subscription_First_Time_Trigger {
 	 */
 	public function __construct() {
 
-		$this->trigger_code = 'SEJOLI_ORDER_SUBSCRIPTION_FIRSTTIME';
-		$this->trigger_meta = 'SEJOLI_CREATE_ORDER_SUBSCRIPTION_FIRSTTIME';
+		$this->trigger_code = 'SEJOLI_ORDER_SUBSCRIPTION_TRYOUT_EVERYONE';
+		$this->trigger_meta = 'SEJOLI_CREATE_ORDER_SUBSCRIPTION_TRYOUT_EVERYONE';
 
 		$this->define_trigger();
 
@@ -40,11 +40,12 @@ class Automator_Sejoli_Order_Subscription_First_Time_Trigger {
 			'author'              => Automator()->get_author_name( $this->trigger_code ),
 			'integration'         => self::$integration,
 			'code'                => $this->trigger_code,
-			'sentence'            => sprintf( esc_attr__( 'If there is a "first time" subscription order type', 'sejoli-uncanny-automator' ) ),
-			'select_option_name'  => esc_attr__( 'If there is a "first time" subscription order type', 'sejoli-uncanny-automator' ),
+			'sentence'            => sprintf( esc_attr__( 'If there is a "tryout" subscription order type', 'sejoli-uncanny-automator' ) ),
+			'select_option_name'  => esc_attr__( 'If there is a "tryout" subscription order type', 'sejoli-uncanny-automator' ),
 			'action'              => 'sejoli/thank-you/render',
 			'priority'            => 999,
 			'accepted_args'       => 2,
+			'type'                => 'anonymous',
 			'validation_function' => array( $this, 'validate_trigger' ),
 			'options_callback'    => '',
 		);
@@ -58,7 +59,7 @@ class Automator_Sejoli_Order_Subscription_First_Time_Trigger {
 	 * @return bool
 	 */
 	public function validate_trigger( $order ) : bool {
-		
+
 		$order_id 		   = $order[0]['ID'];
 		$user_id  		   = $order[0]['user_id'];
 		$subscription_type = $order[0]['type'];
@@ -70,7 +71,7 @@ class Automator_Sejoli_Order_Subscription_First_Time_Trigger {
 
 		} else {
 
-			if( $subscription_type === 'regular' && $product_type === 'digital' ) :
+			if( $subscription_type === 'subscription-tryout' && $product_type === 'digital' ) :
 
 				$pass_args = array(
 					'code'     => $this->trigger_code,
@@ -252,15 +253,15 @@ class Automator_Sejoli_Order_Subscription_First_Time_Trigger {
 					}
 
 				}
-
+				
 				return true;
 
 			else:
 
 				return false;
-			
+
 			endif;
-		
+
 		}
 
 	}
@@ -278,4 +279,3 @@ class Automator_Sejoli_Order_Subscription_First_Time_Trigger {
 	}
 
 }
-?>

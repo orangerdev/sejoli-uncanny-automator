@@ -3,11 +3,11 @@
 namespace Uncanny_Automator;
 
 /**
- * Class Automator_Sejoli_Order_Subscription_First_Time_Trigger
+ * Class Automator_Sejoli_New_Commission_Trigger_Everyone
  *
  * @package Uncanny_Automator
  */
-class Automator_Sejoli_Order_Subscription_First_Time_Trigger {
+class Automator_Sejoli_New_Commission_Trigger_Everyone {
 
 	/**
 	 * Integration code
@@ -24,8 +24,8 @@ class Automator_Sejoli_Order_Subscription_First_Time_Trigger {
 	 */
 	public function __construct() {
 
-		$this->trigger_code = 'SEJOLI_ORDER_SUBSCRIPTION_FIRSTTIME';
-		$this->trigger_meta = 'SEJOLI_CREATE_ORDER_SUBSCRIPTION_FIRSTTIME';
+		$this->trigger_code = 'SEJOLI_NEW_COMMISSION_EVERYONE';
+		$this->trigger_meta = 'SEJOLI_CREATE_COMMISSION_EVERYONE';
 
 		$this->define_trigger();
 
@@ -40,11 +40,12 @@ class Automator_Sejoli_Order_Subscription_First_Time_Trigger {
 			'author'              => Automator()->get_author_name( $this->trigger_code ),
 			'integration'         => self::$integration,
 			'code'                => $this->trigger_code,
-			'sentence'            => sprintf( esc_attr__( 'If there is a "first time" subscription order type', 'sejoli-uncanny-automator' ) ),
-			'select_option_name'  => esc_attr__( 'If there is a "first time" subscription order type', 'sejoli-uncanny-automator' ),
-			'action'              => 'sejoli/thank-you/render',
+			'sentence'            => sprintf( esc_attr__( 'If there is a new commission', 'sejoli-uncanny-automator' ) ),
+			'select_option_name'  => esc_attr__( 'If there is a new commission', 'sejoli-uncanny-automator' ),
+			'action'              => 'sejoli/order/new',
 			'priority'            => 999,
 			'accepted_args'       => 2,
+			'type'                => 'anonymous',
 			'validation_function' => array( $this, 'validate_trigger' ),
 			'options_callback'    => '',
 		);
@@ -57,20 +58,23 @@ class Automator_Sejoli_Order_Subscription_First_Time_Trigger {
 	 * Validate Trigger
 	 * @return bool
 	 */
-	public function validate_trigger( $order ) : bool {
-		
-		$order_id 		   = $order[0]['ID'];
-		$user_id  		   = $order[0]['user_id'];
-		$subscription_type = $order[0]['type'];
-		$product_type      = $order[0]['product']->type;
+	public function validate_trigger( $order_data ) : bool {
 
-	    if ( empty( $order ) && empty( $order_id ) ) {
+		$order_id     = $order_data[0]['ID'];
+		$user_id      = $order_data[0]['user_id'];
+		$affiliate_id = intval( $order_data[0]['affiliate_id'] );
+
+	    if ( empty( $order_data ) && empty( $order_id ) ) {
 
 			return false;
 
 		} else {
 
-			if( $subscription_type === 'regular' && $product_type === 'digital' ) :
+			if ( 0 === $affiliate_id ) {
+
+				return false;
+
+			} else {
 
 				$pass_args = array(
 					'code'     => $this->trigger_code,
@@ -95,46 +99,46 @@ class Automator_Sejoli_Order_Subscription_First_Time_Trigger {
 							);
 
 							$trigger_meta['meta_key']   = 'SEJOLITOKEN_INVOICENUMBER';
-							$trigger_meta['meta_value'] = $order[0]['ID'];
+							$trigger_meta['meta_value'] = $order_data[0]['ID'];
 							Automator()->insert_trigger_meta( $trigger_meta );
 
 							$trigger_meta['meta_key']   = 'SEJOLITOKEN_QUANTITY';
-							$trigger_meta['meta_value'] = $order[0]['quantity'];
+							$trigger_meta['meta_value'] = $order_data[0]['quantity'];
 							Automator()->insert_trigger_meta( $trigger_meta );
 
 							$trigger_meta['meta_key']   = 'SEJOLITOKEN_BUYERNAME';
-							$trigger_meta['meta_value'] = $order[0]['user_name'];
+							$trigger_meta['meta_value'] = $order_data[0]['user_name'];
 							Automator()->insert_trigger_meta( $trigger_meta );
 
 							$trigger_meta['meta_key']   = 'SEJOLITOKEN_BUYEREMAIL';
-							$trigger_meta['meta_value'] = $order[0]['user_email'];
+							$trigger_meta['meta_value'] = $order_data[0]['user_email'];
 							Automator()->insert_trigger_meta( $trigger_meta );
 
 							$trigger_meta['meta_key']   = 'SEJOLITOKEN_BUYERPHONE';
-							$trigger_meta['meta_value'] = $order[0]['user']->data->meta->phone;
+							$trigger_meta['meta_value'] = $order_data[0]['user']->data->meta->phone;
 							Automator()->insert_trigger_meta( $trigger_meta );
 
 							$trigger_meta['meta_key']   = 'SEJOLITOKEN_BUYERADDRESS';
-							$trigger_meta['meta_value'] = $order[0]['user']->data->meta->address;
+							$trigger_meta['meta_value'] = $order_data[0]['user']->data->meta->address;
 							Automator()->insert_trigger_meta( $trigger_meta );
 
 							$trigger_meta['meta_key']   = 'SEJOLITOKEN_AFFILIATENAME';
-							$trigger_meta['meta_value'] = $order[0]['affiliate_name'];
+							$trigger_meta['meta_value'] = $order_data[0]['affiliate_name'];
 							Automator()->insert_trigger_meta( $trigger_meta );
 
-							if( isset($order[0]['affiliate']) ){
+							if( isset($order_data[0]['affiliate']) ){
 
 								$trigger_meta['meta_key']   = 'SEJOLITOKEN_AFFILIATEEMAIL';
-								$trigger_meta['meta_value'] = $order[0]['affiliate']->data->user_email;
+								$trigger_meta['meta_value'] = $order_data[0]['affiliate']->data->user_email;
 								Automator()->insert_trigger_meta( $trigger_meta );
 
 								$trigger_meta['meta_key']   = 'SEJOLITOKEN_AFFILIATEPHONE';
-								$trigger_meta['meta_value'] = $order[0]['affiliate']->data->meta->phone;
+								$trigger_meta['meta_value'] = $order_data[0]['affiliate']->data->meta->phone;
 								Automator()->insert_trigger_meta( $trigger_meta );
 
 							}
 
-							$get_affiliate_tier = array_column($order[0]['product']->affiliate, 'fee', 'tier');
+							$get_affiliate_tier = array_column($order_data[0]['product']->affiliate, 'fee', 'tier');
 							$affiliate_tier = implode('', array_map(
 							    function ($v, $k) { 
 							    	return sprintf("Tier (%s) = %s \n", $k, sejolisa_price_format($v)); 
@@ -148,7 +152,7 @@ class Automator_Sejoli_Order_Subscription_First_Time_Trigger {
 							Automator()->insert_trigger_meta( $trigger_meta );
 
 							$get_commission = sejolisa_get_commissions([
-								'order_id'	=> $order[0]['ID']
+								'order_id'	=> $order_data[0]['ID']
 							]);
 
 							$affiliate_commission = implode('', array_map(
@@ -164,43 +168,43 @@ class Automator_Sejoli_Order_Subscription_First_Time_Trigger {
 							Automator()->insert_trigger_meta( $trigger_meta );
 
 							$trigger_meta['meta_key']   = 'SEJOLITOKEN_ORDERDATE';
-							$trigger_meta['meta_value'] = $order[0]['created_at'];
+							$trigger_meta['meta_value'] = $order_data[0]['created_at'];
 							Automator()->insert_trigger_meta( $trigger_meta );
 
 							$trigger_meta['meta_key']   = 'SEJOLITOKEN_ORDERSTATUS';
-							$trigger_meta['meta_value'] = $order[0]['status'];
+							$trigger_meta['meta_value'] = $order_data[0]['status'];
 							Automator()->insert_trigger_meta( $trigger_meta );
 
 							$trigger_meta['meta_key']   = 'SEJOLITOKEN_COUPONCODE';
-							$trigger_meta['meta_value'] = $order[0]['coupon_code'];
+							$trigger_meta['meta_value'] = $order_data[0]['coupon_code'];
 							Automator()->insert_trigger_meta( $trigger_meta );
 
 							$trigger_meta['meta_key']   = 'SEJOLITOKEN_PAYMENTGATEWAY';
-							$trigger_meta['meta_value'] = $order[0]['payment_info']['bank'] .' - '. $order[0]['payment_info']['owner'] .' - '. $order[0]['payment_info']['account_number'];
+							$trigger_meta['meta_value'] = $order_data[0]['payment_info']['bank'] .'-'. $order_data[0]['payment_info']['owner'] .'-'. $order_data[0]['payment_info']['account_number'];
 							Automator()->insert_trigger_meta( $trigger_meta );
 
-							if( isset( $order[0]['courier'] ) ) {
+							if( isset( $order_data[0]['courier'] ) ) {
 
 								$trigger_meta['meta_key']   = 'SEJOLITOKEN_SHIPPINGMETHOD';
-								$trigger_meta['meta_value'] = $order[0]['courier'];
+								$trigger_meta['meta_value'] = $order_data[0]['courier'];
 								Automator()->insert_trigger_meta( $trigger_meta );
 
 							}
 
-							if( isset( $order[0]['meta_data']['variants']['0']['label'] ) ) {
+							if( isset( $order_data[0]['meta_data']['variants']['0']['label'] ) ) {
 
 								$trigger_meta['meta_key']   = 'SEJOLITOKEN_PRODUCTVARIANT';
-								$trigger_meta['meta_value'] = $order[0]['meta_data']['variants']['0']['label'];
+								$trigger_meta['meta_value'] = $order_data[0]['meta_data']['variants']['0']['label'];
 								Automator()->insert_trigger_meta( $trigger_meta );
 
 							}
 
-							if( $order[0]['status'] === 'shipping' ) {
+							if( $order_data[0]['status'] === 'shipping' ) {
 
-								if( isset( $order[0]['meta_data']['shipping_data']['resi_number'] ) ) {
+								if( isset( $order_data[0]['meta_data']['shipping_data']['resi_number'] ) ) {
 
 									$trigger_meta['meta_key']   = 'SEJOLITOKEN_NUMBERRESI';
-									$trigger_meta['meta_value'] = $order[0]['meta_data']['shipping_data']['resi_number'];
+									$trigger_meta['meta_value'] = $order_data[0]['meta_data']['shipping_data']['resi_number'];
 									Automator()->insert_trigger_meta( $trigger_meta );
 
 								}
@@ -208,15 +212,15 @@ class Automator_Sejoli_Order_Subscription_First_Time_Trigger {
 							}
 
 							$trigger_meta['meta_key']   = 'SEJOLITOKEN_ORDERID';
-							$trigger_meta['meta_value'] = $order[0]['ID'];
+							$trigger_meta['meta_value'] = $order_data[0]['ID'];
 							Automator()->insert_trigger_meta( $trigger_meta );
 
 							$trigger_meta['meta_key']   = 'SEJOLITOKEN_PRODUCTNAME';
-							$trigger_meta['meta_value'] = $order[0]['product']->post_title;
+							$trigger_meta['meta_value'] = $order_data[0]['product']->post_title;
 							Automator()->insert_trigger_meta( $trigger_meta );
 
 							$trigger_meta['meta_key']   = 'SEJOLITOKEN_ORDERGRANDTOTAL';
-							$trigger_meta['meta_value'] = sejolisa_price_format($order[0]['grand_total']);
+							$trigger_meta['meta_value'] = sejolisa_price_format($order_data[0]['grand_total']);
 							Automator()->insert_trigger_meta( $trigger_meta );
 
 							global $wpdb;
@@ -255,12 +259,8 @@ class Automator_Sejoli_Order_Subscription_First_Time_Trigger {
 
 				return true;
 
-			else:
+			}
 
-				return false;
-			
-			endif;
-		
 		}
 
 	}
@@ -269,13 +269,12 @@ class Automator_Sejoli_Order_Subscription_First_Time_Trigger {
 	 * Set Order ID
 	 * @param mixed $args
 	 */
-	protected function prepare_to_run( $order ) {
+	protected function prepare_to_run( $order_data ) {
 
 		// Set Order ID
-		$order_id = absint( $order[0]['ID'] );
+		$order_id = absint( $order_data[0]['ID'] );
 		$this->set_ignore_post_id( $order_id );
 
 	}
 
 }
-?>
