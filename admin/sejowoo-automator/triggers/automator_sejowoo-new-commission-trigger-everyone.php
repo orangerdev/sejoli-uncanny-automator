@@ -1,47 +1,6 @@
 <?php
-// use Uncanny_Automator\Recipe;
 
-// /**
-//  * Class Automator_Sejowoo_New_Commission_Trigger_Everyone
-//  */
-// class Automator_Sejowoo_New_Commission_Trigger_Everyone {
-	
-// 	use Recipe\Triggers;
-
-// 	/**
-// 	 * Automator_Sejowoo_New_Commission_Trigger_Everyone constructor.
-// 	 */
-// 	public function __construct() {
-	
-// 		$this->setup_trigger();
-	
-// 	}
-
-// 	/**
-// 	 * Setup Trigger
-// 	 */
-// 	protected function setup_trigger() {
-
-// 		$this->set_integration( 'SEJOWOO' );
-
-// 		$this->set_trigger_code( 'SEJOWOO_NEW_COMMISSION' ); // Unique Trigger code
-
-// 		$this->set_trigger_meta( 'SEJOWOO_CREATE_COMMISSION' ); // Re-useable meta, selectable value in blue boxes
-
-// 		/* Translators: Some information for translators */
-// 		$this->set_sentence( sprintf( 'If there is a new commission' ) ); // Sentence to appear when trigger is added. {{a page:%1$s}} will be presented in blue box as selectable value
-
-// 		/* Translators: Some information for translators */
-// 		$this->set_readable_sentence( 'If there is a new commission' ); // Non-active state sentence to show
-
-// 		$this->add_action( 'sejowoo/commission/add', 999, 2 ); // which do_action() fires this trigger
-
-// 		$this->register_trigger(); // Registering this trigger
-
-// 	}
-
-
-namespace Uncanny_Automator;
+use Uncanny_Automator\Recipe;
 
 /**
  * Class Automator_Sejowoo_New_Commission_Trigger_Everyone

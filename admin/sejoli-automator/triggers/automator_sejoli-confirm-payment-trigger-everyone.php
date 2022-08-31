@@ -1,6 +1,6 @@
 <?php
 
-namespace Uncanny_Automator;
+use Uncanny_Automator\Recipe;
 
 /**
  * Class Automator_Sejoli_Confirm_Payment_Trigger_Everyone

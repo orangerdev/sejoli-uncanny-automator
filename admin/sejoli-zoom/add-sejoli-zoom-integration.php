@@ -1,5 +1,5 @@
 <?php
-namespace Uncanny_Automator;
+use Uncanny_Automator\Recipe;
 
 /**
  * Class Add_Zoom_Integration

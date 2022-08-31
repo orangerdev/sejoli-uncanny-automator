@@ -1,6 +1,6 @@
 <?php
 
-namespace Uncanny_Automator;
+use Uncanny_Automator\Recipe;
 
 /**
  * Class Automator_Sejoli_Order_Subscription_First_Time_Trigger

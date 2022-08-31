@@ -1,19 +1,6 @@
 <?php
-// use Uncanny_Automator\Recipe;
 
-// /**
-//  * Class Automator_Sejoli_Order_Subscription_Regular_Trigger_Everyone
-//  */
-// class Automator_Sejoli_Order_Subscription_Regular_Trigger_Everyone {
-	
-// 	use Recipe\Triggers;
-
-// 	/**
-// 	 * Automator_Sejoli_Order_Subscription_Regular_Trigger_Everyone constructor.
-// 	 */
-// 	publ
-
-namespace Uncanny_Automator;
+use Uncanny_Automator\Recipe;
 
 /**
  * Class Automator_Sejoli_Order_Subscription_Regular_Trigger_Everyone

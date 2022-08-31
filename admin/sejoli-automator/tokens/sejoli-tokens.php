@@ -1,6 +1,7 @@
 <?php
 
-namespace Uncanny_Automator;
+// namespace Uncanny_Automator;
+use Uncanny_Automator\Recipe;
 
 /**
  * Class Sejoli_Tokens
@@ -9,7 +10,7 @@ namespace Uncanny_Automator;
  */
 class Sejoli_Tokens {
 
-	use Recipe\Tokens;
+	// use Recipe\Tokens;
 
 	/**
 	 * Integration code
