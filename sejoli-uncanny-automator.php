@@ -15,7 +15,7 @@
  * Plugin Name:       Sejoli Uncanny Automator
  * Plugin URI:        https://sejoli.co.id
  * Description:       Integrate Sejoli Premium Membership plugin with Uncanny Automator.
- * Version:           1.0.0
+ * Version:           1.1.0
  * Author:            Sejoli Team
  * Author URI:        https://sejoli.co.id
  * License:           GPL-2.0+
@@ -34,7 +34,7 @@ if ( ! defined( 'WPINC' ) ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'SEJOLI_UNCANNY_AUTOMATOR_VERSION', '1.0.0' );
+define( 'SEJOLI_UNCANNY_AUTOMATOR_VERSION', '1.1.0' );
 define( 'SEJOLI_UNCANNY_AUTOMATOR_DIR', plugin_dir_path( __FILE__ ) );
 define( 'SEJOLI_UNCANNY_AUTOMATOR_URL', plugin_dir_url( __FILE__ ) );
 
@@ -77,7 +77,7 @@ function sejoli_uncanny_automator_check_required_plugin() {
  * This action is documented in includes/class-sejoli-uncanny-automator-activator.php
  */
 function activate_sejoli_uncanny_automator() {
-	
+
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-sejoli-uncanny-automator-activator.php';
 	Sejoli_Uncanny_Automator_Activator::activate();
 
@@ -88,7 +88,7 @@ function activate_sejoli_uncanny_automator() {
  * This action is documented in includes/class-sejoli-uncanny-automator-deactivator.php
  */
 function deactivate_sejoli_uncanny_automator() {
-	
+
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-sejoli-uncanny-automator-deactivator.php';
 	Sejoli_Uncanny_Automator_Deactivator::deactivate();
 
