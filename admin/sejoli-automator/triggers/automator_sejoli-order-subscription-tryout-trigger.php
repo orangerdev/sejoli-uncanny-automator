@@ -59,10 +59,12 @@ class Automator_Sejoli_Order_Subscription_Tryout_Trigger {
 	 */
 	public function validate_trigger( $order ) : bool {
 
-		$order_id 		   = $order['ID'];
-		$user_id  		   = $order['user_id'];
-		$subscription_type = $order['type'];
-		$product_type      = $order['product']->type;
+		$order_id 		     = $order['ID'];
+		$user_id  		     = $order['user_id'];
+		$subscription_type   = $order['type'];
+		$subscription_active = $order['product']->subscription['active'];
+		$product_type        = $order['product']->type;
+		$tryout              = $order['product']->subscription['tryout']['active'];
 
 	    if ( empty( $order ) && empty( $order_id ) ) {
 
@@ -70,7 +72,7 @@ class Automator_Sejoli_Order_Subscription_Tryout_Trigger {
 
 		} else {
 
-			if( $subscription_type === 'subscription-tryout' && $product_type === 'digital' ) :
+			if( $subscription_type === 'subscription-regular' && $product_type === 'digital' && $subscription_active > 0 && $tryout > 0 ) :
 
 				$pass_args = array(
 					'code'     => $this->trigger_code,
