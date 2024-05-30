@@ -77,14 +77,14 @@ class Automator_Sejowoo_Update_User_Into_Usergroup_Action {
 	 * @param array $args
 	 * @param $parsed
 	 */
-	protected function process_action( int $user_id, array $action_data, int $recipe_id, array $args, $parsed ) {
+	protected function process_action( $user_id, $action_data, $recipe_id, $args, $parsed ) {
 		
 		$action_meta    = $action_data['meta'];
 		$get_user_group = Automator()->parse->text( $action_meta['SEJOWOO_SET_USER_GROUP'], $recipe_id, $user_id, $args );
 
 		if( !empty( $user_id ) && !empty( $get_user_group ) ) :
             
-            $update_user_group = sejowoo_update_user_group( 18, intval( $get_user_group ), true );
+            $update_user_group = sejowoo_update_user_group( $user_id, intval( $get_user_group ), true );
 
             // If there was an error, it'll be logged in action log with an error message.
 			if ( is_automator_error( $update_user_group ) ) {

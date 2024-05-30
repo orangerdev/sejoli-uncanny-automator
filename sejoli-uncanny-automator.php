@@ -15,7 +15,7 @@
  * Plugin Name:       Sejoli Uncanny Automator
  * Plugin URI:        https://sejoli.co.id
  * Description:       Integrate Sejoli Premium Membership plugin with Uncanny Automator.
- * Version:           1.1.1
+ * Version:           1.1.2
  * Author:            Sejoli Team
  * Author URI:        https://sejoli.co.id
  * License:           GPL-2.0+
@@ -34,7 +34,7 @@ if ( ! defined( 'WPINC' ) ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'SEJOLI_UNCANNY_AUTOMATOR_VERSION', '1.1.1' );
+define( 'SEJOLI_UNCANNY_AUTOMATOR_VERSION', '1.1.2' );
 define( 'SEJOLI_UNCANNY_AUTOMATOR_DIR', plugin_dir_path( __FILE__ ) );
 define( 'SEJOLI_UNCANNY_AUTOMATOR_URL', plugin_dir_url( __FILE__ ) );
 
