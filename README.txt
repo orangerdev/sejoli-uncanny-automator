@@ -12,6 +12,12 @@ Integrates automation system with Sejoli Premium WordPress Membership plugin,
 
 == Changelog ==
 
+= 1.1.2 30 Mei 2024 =
+* Fix actions update user group
+
+= 1.1.1 12 Februari 2023 =
+* Fix disable sejoli zoom overide
+
 = 1.1.0 3 September 2022 =
 * Fix compatibility with latest uncanny
 
